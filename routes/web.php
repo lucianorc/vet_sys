@@ -12,11 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.index');
 });
 
 Route::group(['prefix' => 'customers'], function () {
     Route::get('/', function() {
         return view('customers.index');
+    });
+    Route::get('/create', function() {
+        return '';
     });
 });
