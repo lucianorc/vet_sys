@@ -37,9 +37,35 @@ class CustomerTest extends TestCase
      *
      * @return void
      */
-    public function testIfIndexPageHasCreateButton() {
+    public function testIfIndexPageHasCreateButton()
+    {
         $response = $this->get('/customers');
 
         $response->assertSeeText('Criar cliente');
+    }
+
+    /**
+     * Test if GET /customers has a customers table
+     */
+    public function testIfIndexPageHasTable()
+    {
+        $response = $this->get('/customers');
+
+        $response->assertSeeInOrder([
+            '<table',
+            '</table>'
+        ]);
+    }
+
+    /**
+     * Test if /customers/create gets 200 status code
+     *
+     * @return void
+     */
+    public function testIfGetsCreatePage()
+    {
+        $response = $this->get('/customers/create');
+
+        $response->assertStatus(200);
     }
 }
