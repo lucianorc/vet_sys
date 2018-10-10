@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Customer;
 
-class CustomerRepository // implements RepositoryInterface
+class CustomerRepository
 {
     protected $customer;
 
@@ -16,5 +16,10 @@ class CustomerRepository // implements RepositoryInterface
     public function all()
     {
         return $this->customer->all();
+    }
+
+    public function find($id)
+    {
+        return $this->customer->find($id);
     }
 }

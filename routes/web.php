@@ -20,4 +20,6 @@ Route::group(['prefix' => 'customers'], function () {
     Route::get('/create', function() {
         return '';
     });
+
+    Route::get('/view/{id}', ['as' => 'view', 'uses' => 'CustomerController@view']);
 });
