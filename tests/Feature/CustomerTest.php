@@ -6,8 +6,16 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+use App\Customer as CustomerController;
+
 class CustomerTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * Test if GET Customer Page return status code 200
      *
@@ -68,4 +76,19 @@ class CustomerTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * Test if Customer factory works
+     *
+     * @return void
+     */
+    public function testCustomerCreation()
+    {
+        $customer = factory(CustomerController::class)->create([
+            'name' => 'John Doe'
+        ]);
+
+        $this->assertDatabaseHas('customers', ['name' => 'John Doe']);
+    }
+
 }
