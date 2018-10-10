@@ -19,21 +19,26 @@
       </tr>
     </thead>
     <tbody>
+      @foreach ($customers as $customer)
       <tr>
-        <td>1</td>
-        <td>John Doe</td>
-        <td>(98) 98888-8888</td>
+        <td>{{ $customer->id }}</td>
+        <td>{{ $customer->name }}</td>
+        <td>{{ $customer->phone }}</td>
         <td>
-          <div class="btn-group pull-left" role="group">
-            <button class="btn btn-primary pull-left">
+          <div class="btn-group pull-right" role="group">
+            <button class="btn btn-warning pull-right">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn btn-primary pull-right">
               <i class="fas fa-pen"></i>
             </button>
-            <button class="btn btn-danger pull-left">
+            <button class="btn btn-danger pull-right">
               <i class="fas fa-trash"></i>
             </button>
           </div>
         </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
 </div>

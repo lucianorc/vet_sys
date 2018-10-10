@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use App\Customer as CustomerController;
+use App\Models\Customer;
 
 class CustomerTest extends TestCase
 {
@@ -84,7 +84,7 @@ class CustomerTest extends TestCase
      */
     public function testCustomerCreation()
     {
-        $customer = factory(CustomerController::class)->create([
+        $customer = factory(Customer::class)->create([
             'name' => 'John Doe'
         ]);
 
