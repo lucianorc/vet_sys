@@ -22,4 +22,15 @@ class CustomerRepository
     {
         return $this->customer->find($id);
     }
+
+    public function create($customer)
+    {
+        $this->customer->name = $customer->name;
+        $this->customer->address = $customer->address;
+        $this->customer->birthday = $customer->birthday;
+        $this->customer->phone = $customer->phone;
+        $this->customer->email = $customer->email;
+
+        $this->customer->save();
+    }
 }

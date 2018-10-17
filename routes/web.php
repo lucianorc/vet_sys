@@ -16,10 +16,12 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'customers'], function () {
-    Route::get('/', ['as' => 'index', 'uses' => 'CustomerController@getIndex']);
-    Route::get('/create', function() {
-        return '';
-    });
+    Route::get('/', ['as' => 'customers.index', 'uses' => 'CustomerController@getIndex']);
+    Route::match(
+        ['get', 'post'],
+        '/create',
+        ['as' => 'customers.create', 'uses' => 'CustomerController@create']
+    );
 
     Route::get('/view/{id}', ['as' => 'view', 'uses' => 'CustomerController@view']);
 });

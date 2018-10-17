@@ -45,4 +45,23 @@ class CustomerController extends Controller
             ->json($customer->toArray(), 200)
             ->header('Content-Type', 'application/json');
     }
+
+    /**
+     * GET /customers/create
+     * POST /customers/create
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return void
+     */
+    public function create(Request $request, Response $response)
+    {
+        if($request->isMethod('GET')) {
+            return view('customers.create');
+        } elseif ($request->isMethod('POST')) {
+            $this->customerRepository->create($request);
+            return redirect(route('customers.index'));
+        }
+
+    }
 }

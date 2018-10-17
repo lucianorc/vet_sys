@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-end">
-    <a href="/customers/create">
+    <a href="{{ route('customers.create') }}">
       <button type="button" class="btn btn-dark">
         Criar cliente
       </button>
