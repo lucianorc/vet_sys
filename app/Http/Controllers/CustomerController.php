@@ -62,6 +62,18 @@ class CustomerController extends Controller
             $this->customerRepository->create($request);
             return redirect(route('customers.index'));
         }
+    }
 
+    /**
+     * DELETE /customers/delete
+     *
+     * @param Request $request
+     * @param $id
+     * @return $void
+     */
+    public function delete(Request $request)
+    {
+        $this->customerRepository->delete($request->id);
+        return redirect(route('customers.index'));
     }
 }

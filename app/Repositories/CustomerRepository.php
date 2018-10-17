@@ -33,4 +33,9 @@ class CustomerRepository
 
         $this->customer->save();
     }
+
+    public function delete($id)
+    {
+        $this->customer->find($id)->delete();
+    }
 }

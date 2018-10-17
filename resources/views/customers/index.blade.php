@@ -26,13 +26,13 @@
         <td>{{ $customer->phone }}</td>
         <td>
           <div class="btn-group pull-right" role="group">
-            <button type="button" class="btn btn-sm btn-warning pull-right actions" action="view" customer-id="{{ $customer->id }}" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-sm btn-warning" action="view" customer-id="{{ $customer->id }}" data-toggle="modal" data-target="#exampleModal">
               <i class="fas fa-eye"></i>
             </button>
-            <button class="btn btn-sm btn-primary pull-right actions">
+            <button class="btn btn-sm btn-primary">
               <i class="fas fa-pen"></i>
             </button>
-            <button class="btn btn-sm btn-danger pull-right actions">
+            <button class="btn btn-sm btn-danger" action="delete" customer-id="{{ $customer->id }}">
               <i class="fas fa-trash"></i>
             </button>
           </div>
