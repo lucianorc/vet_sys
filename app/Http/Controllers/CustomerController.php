@@ -77,6 +77,25 @@ class CustomerController extends Controller
     }
 
     /**
+     * GET /customers/update/$id
+     * PUT /customers/update/$id
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update(Request $request)
+    {
+        $customer = $this->customerRepository->find($request->id);
+
+        if($request->isMethod('GET')) {
+            return view('customers.update', ['customer' => $customer]);
+        } elseif($request->isMethod('PUT')) {
+            $this->customerRepository->update($request->id, $request->toArray());
+            return redirect(route('customers.index'));
+        }
+    }
+
+    /**
      * GET /customers/pets/$id
      *
      * @param Request $request

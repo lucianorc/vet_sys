@@ -39,6 +39,11 @@ class CustomerRepository
         $this->customer->find($id)->delete();
     }
 
+    public function update($id, $data)
+    {
+        $this->customer->find($id)->update($data);
+    }
+
     public function getPetsByCustomer($id)
     {
         return $this->customer->with('pets')->find($id);

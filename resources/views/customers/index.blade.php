@@ -32,9 +32,11 @@
             <button type="button" class="btn btn-sm btn-warning" action="view" customer-id="{{ $customer->id }}" data-toggle="modal" data-target="#showCustomer">
               <i class="fas fa-eye"></i>
             </button>
-            <button class="btn btn-sm btn-primary">
-              <i class="fas fa-pen"></i>
-            </button>
+            <a href="{{ route('customers.update', $customer->id) }}">
+              <button class="btn btn-sm btn-primary">
+                <i class="fas fa-pen"></i>
+              </button>
+            </a>
             <button class="btn btn-sm btn-danger" action="delete" customer-id="{{ $customer->id }}">
               <i class="fas fa-trash"></i>
             </button>

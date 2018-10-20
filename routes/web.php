@@ -22,6 +22,12 @@ Route::group(['prefix' => 'customers'], function () {
         '/create',
         ['as' => 'customers.create', 'uses' => 'CustomerController@create']
     );
+
+    Route::match(
+        ['get', 'put'],
+        '/update/{id}',
+        ['as' => 'customers.update', 'uses' => 'CustomerController@update']
+    );
     Route::delete('/delete', ['as' => 'customers.delete', 'uses' => 'CustomerController@delete']);
 
     Route::get('/view/{id}', ['as' => 'view', 'uses' => 'CustomerController@view']);
