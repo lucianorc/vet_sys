@@ -38,4 +38,9 @@ class CustomerRepository
     {
         $this->customer->find($id)->delete();
     }
+
+    public function getPetsByCustomer($id)
+    {
+        return $this->customer->find($id)->pets()->get();
+    }
 }

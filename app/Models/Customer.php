@@ -11,4 +11,9 @@ class Customer extends Model
     protected $fillable = [
         'name', 'email', 'birthday', 'address', 'phone'
     ];
+
+    public function pets()
+    {
+        return $this->hasMany('App\Models\Pet');
+    }
 }
