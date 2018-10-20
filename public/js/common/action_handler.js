@@ -25,6 +25,16 @@ function handleAction(target) {
       }).catch( err => {
         console.log(err.message)
       })
+    },
+    pets: () => {
+      return axios({
+        method: 'get',
+        url: '/customers/pets/' + customer_id,
+      }).then( r => {
+        return r.data
+      }).catch( err => {
+        console.log('Error', err.message)
+      })
     }
   }
 

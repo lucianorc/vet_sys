@@ -68,12 +68,28 @@ class CustomerController extends Controller
      * DELETE /customers/delete
      *
      * @param Request $request
-     * @param $id
      * @return $void
      */
     public function delete(Request $request)
     {
         $this->customerRepository->delete($request->id);
         return redirect(route('customers.index'));
+    }
+
+    /**
+     * GET /customers/pets/$id
+     *
+     * @param Request $request
+     * @return $void
+     */
+    public function getPets(Request $request)
+    {
+        $pets = $this
+            ->customerRepository
+            ->getPetsByCustomer($request->id);
+
+            return response()
+                ->json($pets->toArray(), 200)
+                ->header('Content-type', 'application/json');
     }
 }

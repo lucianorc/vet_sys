@@ -25,4 +25,10 @@ Route::group(['prefix' => 'customers'], function () {
     Route::delete('/delete', ['as' => 'customers.delete', 'uses' => 'CustomerController@delete']);
 
     Route::get('/view/{id}', ['as' => 'view', 'uses' => 'CustomerController@view']);
+
+    Route::get('/pets/{id}', ['as' => 'customers.pets', 'uses' => 'CustomerController@getPets']);
+});
+
+Route::group(['prefix' => 'pets'], function () {
+
 });

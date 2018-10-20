@@ -26,7 +26,10 @@
         <td>{{ $customer->phone }}</td>
         <td>
           <div class="btn-group pull-right" role="group">
-            <button type="button" class="btn btn-sm btn-warning" action="view" customer-id="{{ $customer->id }}" data-toggle="modal" data-target="#exampleModal">
+            <button class="btn btn-sm btn-success" action="pets" customer-id="{{ $customer->id }}" data-toggle="modal" data-target="#showPets">
+              <i class="fas fa-paw"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-warning" action="view" customer-id="{{ $customer->id }}" data-toggle="modal" data-target="#showCustomer">
               <i class="fas fa-eye"></i>
             </button>
             <button class="btn btn-sm btn-primary">
@@ -43,27 +46,8 @@
   </table>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Informações do cliente #<span id="customer-id"></span></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Nome:</strong> <span id="customer-name"></span></p>
-        <p><strong>Endereço:</strong> <span id="customer-address"></span></p>
-        <p><strong>Data de Nascimento:</strong> <span id="customer-birthday"></span></p>
-        <p><strong>Fone:</strong> <span id="customer-phone"></span></p>
-        <p><strong>Email:</strong> <span id="customer-email"></span></p>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
+@include('customers._showCustomer')
+@include('customers._showPets')
 @endsection
 
 @section('scripts')
@@ -71,15 +55,40 @@
 <script src="{{ asset('js/common/action_handler.js') }}"></script>
 <script>
 
-  const button = document.querySelector('tbody')
+  const table = document.querySelector('tbody')
 
-  button.addEventListener('click', e => {
+  table.addEventListener('click', e => {
     e.preventDefault
-    if (e.target.localName.includes('button')) {
-      handleAction(e.target).then(customer => {
+    const button = e.target
+
+    if (button.classList.value.includes('warning')) {
+      handleAction(button).then(customer => {
         Object.entries(customer).forEach( (data, index) => {
           document.getElementById('customer-' + data[0]).innerHTML = data[1]
         })
+      })
+    } else if (button.classList.value.includes('success')) {
+      const customer = button.attributes['customer-id'].nodeValue
+      handleAction(button).then(customer => {
+        document.querySelector('h5#showPetsLabel>span').innerHTML = customer.name
+
+        if (customer.pets.length === 0) {
+          document.getElementById('no-pet').style.display = 'block'
+          document.querySelector('#pet-list>tbody').innerHTML = ''
+        } else {
+          document.getElementById('no-pet').style.display = 'none'
+
+          customer.pets.forEach(pet => {
+            console.log(pet)
+            document.querySelector('#pet-list>tbody').innerHTML = `
+              <tr>
+                <td>${pet.name}</td>
+                <td>${pet.specie}</td>
+                <td>${pet.race}</td>
+              </tr>
+            `
+          })
+        }
       })
     }
   })

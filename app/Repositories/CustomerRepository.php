@@ -41,6 +41,6 @@ class CustomerRepository
 
     public function getPetsByCustomer($id)
     {
-        return $this->customer->find($id)->pets()->get();
+        return $this->customer->with('pets')->find($id);
     }
 }
