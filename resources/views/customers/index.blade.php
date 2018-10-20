@@ -92,6 +92,10 @@
           })
         }
       })
+    } else if (button.classList.value.includes('danger')) {
+      handleAction(button).then( response => {
+        location.reload()
+      })
     }
   })
 
